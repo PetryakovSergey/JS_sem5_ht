@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .content {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+        }
+
+        .card {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .productImg {
+            height: 230px;
+        }
+
+        .description {
+            text-align: center;
+        }
+
+        .price {
+            color: rgb(205, 46, 46);
+        }
+
+        .rating {
+            color: rgb(193, 193, 58)
+        }
+    </style>
+</head>
+
+<body>
+    <div class="content">
+
+    </div>
+
+
+    <script>
+
+        const contentEl = document.querySelector('.content');
+
+        fetch('https://dummyjson.com/products')
+            .then(res => res.json())
+
+            .then((data) => {
+                // const Products = data;
+                // console.log(Products);
+                productsData = data.products;
+                console.log(productsData);
+                productsData.forEach(element => {
+                    const productCard = document.createElement('div');
+                    productCard.classList.add('card');
+                    contentEl.append(productCard);
+
+                    const productImg = document.createElement('img');
+                    productImg.src = element.images[0];
+                    productImg.classList.add('productImg');
+                    productCard.append(productImg);
+
+                    const productTitle = document.createElement('h2');
+                    productTitle.textContent = element.title;
+                    productTitle.classList.add('title');
+                    productCard.append(productTitle);
+
+                    const productDescription = document.createElement('p');
+                    productDescription.textContent = element.description;
+                    productDescription.classList.add('description');
+                    productCard.append(productDescription);
+
+                    const productPrice = document.createElement('p');
+                    productPrice.textContent = element.price + '$';
+                    productPrice.classList.add('price');
+                    productCard.append(productPrice);
+
+                    const productRating = document.createElement('p');
+                    productRating.textContent = element.rating;
+                    productRating.classList.add('rating');
+                    productCard.append(productRating);
+
+
+                });
+            });
+
+    </script>
+</body>
+
+</html>
